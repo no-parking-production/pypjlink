@@ -23,7 +23,6 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
-        'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.12',
@@ -39,5 +38,4 @@ setup(
             'pjlink = pypjlink.cli:main',
         ],
     },
-    test_suite='tests',
 )

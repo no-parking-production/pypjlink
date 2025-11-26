@@ -1,15 +1,8 @@
 import argparse
-
 try:
-    from ConfigParser import (
-        NoSectionError,
-        SafeConfigParser as ConfigParser
-    )
+    import configparser  # Python 3
 except ImportError:
-    from configparser import (
-        NoSectionError,
-        SafeConfigParser as ConfigParser
-    )
+    import ConfigParser as configparser  # Python 2
 
 from getpass import getpass
 from os import path
@@ -128,7 +121,7 @@ def resolve_projector(projector):
         conf_file = path.join(appdir, 'pjlink.conf')
 
         try:
-            config = ConfigParser({'port': '4352', 'password': ''})
+            config = configparser.SafeConfigParser({'port': '4352', 'password': ''})
             with open(conf_file, 'r') as f:
                 config.readfp(f)
 
@@ -140,7 +133,7 @@ def resolve_projector(projector):
             port = config.getint(section, 'port')
             password = config.get(section, 'password') or None
 
-        except (NoSectionError, IOError):
+        except (configparser.NoSectionError, IOError):
             if projector is None:
                 raise KeyError('No default projector defined in %s' % conf_file)
 
